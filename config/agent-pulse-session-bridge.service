@@ -1,0 +1,32 @@
+[Unit]
+Description=agent-pulse Session Bridge (file-based inbox)
+Documentation=https://github.com/your-org/agent-pulse
+After=network.target agent-pulse-hub.service
+Requires=agent-pulse-hub.service
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/opt/agent-pulse
+
+ExecStart=/usr/bin/node src/session-bridge.js
+
+Restart=on-failure
+RestartSec=5s
+StandardOutput=journal
+StandardError=journal
+
+# Optional overrides via env file.
+# Create /etc/agent-pulse/session-bridge.env with:
+#   PULSE_API_URL=http://127.0.0.1:18801
+#   PULSE_INBOX_DIR=/opt/agent-pulse/state/inbox
+EnvironmentFile=-/etc/agent-pulse/session-bridge.env
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/opt/agent-pulse/state /opt/agent-pulse/logs
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+node_modules/
+config/agent-registry.json
+state/
+logs/
+*.log
+.env
+config/agent-registry.json
+*.bak
+*.bak-*

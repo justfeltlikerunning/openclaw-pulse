@@ -1,0 +1,13 @@
+{
+  "agent": "my-agent",
+  "port": 18800,
+  "apiPort": 18801,
+  "peers": {
+    "agent-a": { "ip": "192.168.1.10", "port": 18800, "token": "secret-a" },
+    "agent-b": { "ip": "192.168.1.11", "port": 18800, "token": "secret-b" }
+  },
+  "groups": {
+    "work": ["agent-a", "agent-b"],
+    "all":  ["agent-a", "agent-b"]
+  }
+}
